@@ -79,6 +79,8 @@ class IntTower(BaseTower):
 
         if len(self.item_dnn_feature_columns) > 0:
             print("Second if start")
+            print(self.item_dnn_feature_columns)
+            print(self.item_embedding_dict)
             item_sparse_embedding_list, item_dense_value_list = \
                 self.input_from_feature_columns(inputs, self.item_dnn_feature_columns, self.item_embedding_dict)
 
