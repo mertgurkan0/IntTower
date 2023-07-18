@@ -74,6 +74,7 @@ class IntTower(BaseTower):
 
             self.user_fe_rep = self.user_fe_dnn(user_dnn_input)
             self.user_dnn_embedding = self.user_fe_rep[-1]
+            print("First if end")
 
 
         if len(self.item_dnn_feature_columns) > 0:
@@ -91,6 +92,7 @@ class IntTower(BaseTower):
 
             self.item_fe_rep = self.item_fe_dnn(item_dnn_input)
             self.item_dnn_embedding = self.item_fe_rep[-1]
+            print("Second if end")
 
 
         if len(self.user_dnn_feature_columns) > 0 and len(self.item_dnn_feature_columns) > 0:
@@ -100,6 +102,7 @@ class IntTower(BaseTower):
                                                                                                 self.field_dim,self.field_dim])
 
             output = self.out(score)
+            print("Third if end")
             return output, self.user_dnn_embedding, self.item_dnn_embedding
 
         elif len(self.user_dnn_feature_columns) > 0:
