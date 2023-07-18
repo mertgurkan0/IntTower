@@ -308,6 +308,7 @@ class BaseTower(nn.Module):
             raise ValueError("DenseFeat is not supported in dnn_feature_columns")
 
         print("input_from_feature_columns: Features are split by type.")
+        print(f"Feature index: {self.feature_index}")
 
         sparse_embedding_list = [embedding_dict[feat.embedding_name](
             X[:, self.feature_index[feat.name][0]:self.feature_index[feat.name][1]].long()) for
