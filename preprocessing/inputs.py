@@ -90,11 +90,13 @@ def get_varlen_pooling_list(embedding_dict, features, feature_index, varlen_spar
     varlen_sparse_embedding_list = []
 
     for feat in varlen_sparse_feature_columns:
+        print(f"get_varlen_pooling_list: Feature: {feat}, Feature Name: {feat.name}, Feat. Emb. Name: {feat.embedding_name}")
         seq_emb = embedding_dict[feat.embedding_name](
                         features[:, feature_index[feat.name][0]:feature_index[feat.name][1]].long())
+        print("get_varlen_pooling_list: seq_emb is OK")
         if feat.length_name is None:
             seq_mask = features[:, feature_index[feat.name][0]:feature_index[feat.name][1]].long() != 0
-
+            print("get_varlen_pooling_list: seq_mask is OK")
             emb = SequencePoolingLayer(mode=feat.combiner, support_masking=True, device=device)([seq_emb, seq_mask])
 
         else:
