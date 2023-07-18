@@ -91,7 +91,9 @@ def get_varlen_pooling_list(embedding_dict, features, feature_index, varlen_spar
 
     for feat in varlen_sparse_feature_columns:
         print(f"get_varlen_pooling_list: Feature: {feat}, Feature Name: {feat.name}, Feat. Emb. Name: {feat.embedding_name}")
-        print(f"{feature_index[feat.name]}")
+        print(f"get_varlen_pooling_list: Feature index {feature_index[feat.name]}")
+        print(f"get_varlen_pooling_list: Features shape {features.shape}")
+        print(f"get_varlen_pooling_list: Selected feature shape {features[:, feature_index[feat.name][0]].shape}")
         seq_emb = embedding_dict[feat.embedding_name](
                         features[:, feature_index[feat.name][0]:feature_index[feat.name][1]].long())
         print("get_varlen_pooling_list: seq_emb is OK")
