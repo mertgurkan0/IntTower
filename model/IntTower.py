@@ -78,11 +78,13 @@ class IntTower(BaseTower):
 
 
         if len(self.item_dnn_feature_columns) > 0:
+            print("Second if start")
             item_sparse_embedding_list, item_dense_value_list = \
                 self.input_from_feature_columns(inputs, self.item_dnn_feature_columns, self.item_embedding_dict)
 
-
+            print("Second if features obtained")
             item_sparse_embedding = torch.cat(item_sparse_embedding_list, dim=1)
+            print("Second if sparse embeddings")
             Item_sim_embedding = self.Item_sim_non_local(item_sparse_embedding)
             sparse_dnn_input = torch.flatten(Item_sim_embedding, start_dim=1)
             dense_dnn_input = torch.flatten(torch.cat(item_dense_value_list, dim=-1), start_dim=1)
