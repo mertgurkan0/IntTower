@@ -58,7 +58,7 @@ class IntTower(BaseTower):
 
 
     def forward(self, inputs):
-        # print('inputs shape:', inputs.shape)
+        print('IntTower Forward Pass Inputs shape:', inputs.shape)
         if len(self.user_dnn_feature_columns) > 0:
             user_sparse_embedding_list, user_dense_value_list = \
                 self.input_from_feature_columns(inputs, self.user_dnn_feature_columns, self.user_embedding_dict)

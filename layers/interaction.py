@@ -54,7 +54,7 @@ class LightSE(nn.Module):
         Z = torch.mean(inputs, dim=-1, out=None)
         A = self.excitation(Z) #(batch,reduction_size)
         A = self.softmax(A) #(batch,reduction_size)
-        # print(A.shape, inputs.shape)
+        print(f"LightSE: A shape: {A.shape}, shape of the LightSE input: {inputs.shape}")
         out = inputs * torch.unsqueeze(A, dim=2)
 
         return inputs + out
