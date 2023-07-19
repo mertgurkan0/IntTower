@@ -307,24 +307,24 @@ class BaseTower(nn.Module):
         if not support_dense and len(dense_feature_columns) > 0:
             raise ValueError("DenseFeat is not supported in dnn_feature_columns")
 
-        print("input_from_feature_columns: Features are split by type.")
-        print(f"Feature index: {self.feature_index}")
+        #print("input_from_feature_columns: Features are split by type.")
+        #print(f"Feature index: {self.feature_index}")
 
         sparse_embedding_list = [embedding_dict[feat.embedding_name](
             X[:, self.feature_index[feat.name][0]:self.feature_index[feat.name][1]].long()) for
             feat in sparse_feature_columns]
 
-        print("input_from_feature_columns: Sparse embedding list done.")
+        #print("input_from_feature_columns: Sparse embedding list done.")
 
         varlen_sparse_embedding_list = get_varlen_pooling_list(embedding_dict, X, self.feature_index,
                                                                varlen_sparse_feature_columns, self.device)
 
-        print("input_from_feature_columns: Var Len sparse embedding list done.")
+        #print("input_from_feature_columns: Var Len sparse embedding list done.")
 
         dense_value_list = [X[:, self.feature_index[feat.name][0]:self.feature_index[feat.name][1]] for feat in
                             dense_feature_columns]
 
-        print("input_from_feature_columns: Dense value list done.")
+        #print("input_from_feature_columns: Dense value list done.")
 
         return sparse_embedding_list + varlen_sparse_embedding_list, dense_value_list
 
