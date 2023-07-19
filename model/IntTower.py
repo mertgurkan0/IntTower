@@ -58,7 +58,6 @@ class IntTower(BaseTower):
 
 
     def forward(self, inputs):
-        print('IntTower Forward Pass Inputs shape:', inputs.shape)
         if len(self.user_dnn_feature_columns) > 0:
             user_sparse_embedding_list, user_dense_value_list = \
                 self.input_from_feature_columns(inputs, self.user_dnn_feature_columns, self.user_embedding_dict)
@@ -74,19 +73,13 @@ class IntTower(BaseTower):
 
             self.user_fe_rep = self.user_fe_dnn(user_dnn_input)
             self.user_dnn_embedding = self.user_fe_rep[-1]
-            print("First if end")
 
 
         if len(self.item_dnn_feature_columns) > 0:
-            print("Second if start")
-            print(self.item_dnn_feature_columns)
-            print(self.item_embedding_dict)
             item_sparse_embedding_list, item_dense_value_list = \
                 self.input_from_feature_columns(inputs, self.item_dnn_feature_columns, self.item_embedding_dict)
 
-            print("Second if features obtained")
             item_sparse_embedding = torch.cat(item_sparse_embedding_list, dim=1)
-            print("Second if sparse embeddings")
             Item_sim_embedding = self.Item_sim_non_local(item_sparse_embedding)
             sparse_dnn_input = torch.flatten(Item_sim_embedding, start_dim=1)
             dense_dnn_input = torch.flatten(torch.cat(item_dense_value_list, dim=-1), start_dim=1)
@@ -106,7 +99,6 @@ class IntTower(BaseTower):
                                                                                                 self.field_dim,self.field_dim])
 
             output = self.out(score)
-            print("Third if end")
             return output, self.user_dnn_embedding, self.item_dnn_embedding
 
         elif len(self.user_dnn_feature_columns) > 0:

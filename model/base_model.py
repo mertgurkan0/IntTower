@@ -162,7 +162,7 @@ class BaseModel(nn.Module):
             model = torch.nn.DataParallel(model, device_ids=self.gpus)
             batch_size *= len(self.gpus)  # input `batch_size` is batch_size per gpu
         else:
-            print(self.device)
+            print(f"Starting training with {self.device}.")
 
         train_loader = DataLoader(dataset=train_tensor_data, shuffle=shuffle, batch_size=batch_size)
 
